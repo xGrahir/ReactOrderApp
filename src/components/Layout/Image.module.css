@@ -1,0 +1,12 @@
+.imagediv {
+    overflow: hidden;
+}
+
+.image {
+    width: 110%;
+    height: 25rem;
+    background-position: center;
+    background-size: cover;
+    object-fit: cover;
+    transform: rotateZ(-5deg) translateY(-4rem) translateX(-1rem);
+}
