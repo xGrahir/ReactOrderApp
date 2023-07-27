@@ -8,7 +8,7 @@ const Header = props => {
 	const [btnHighlighted, setBtnHighlighted] = useState(false)
 	const context = useContext(CartContext)
 
-	const {items} = context
+	const { items } = context
 
 	const numOfItems = items.reduce((cNum, item) => {
 		return cNum + item.amount
@@ -17,7 +17,7 @@ const Header = props => {
 	const btnClasses = `${styles.button} ${btnHighlighted ? styles.bump : ''}`
 
 	useEffect(() => {
-		if(items.length === 0) {
+		if (items.length === 0) {
 			return
 		}
 		setBtnHighlighted(true)
@@ -27,9 +27,7 @@ const Header = props => {
 		return () => {
 			clearTimeout(timer)
 		}
-
 	}, [items])
-
 
 	return (
 		<React.Fragment>
@@ -38,7 +36,7 @@ const Header = props => {
 					<h2 className={styles.title}>FoodOrder</h2>
 				</div>
 				<div>
-					<button className={btnClasses} onClick={props.onClose}>
+					<button className={btnClasses} onClick={props.onShow}>
 						<span>
 							<CartIcon />
 						</span>

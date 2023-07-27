@@ -1,41 +1,44 @@
 import styles from './AvailableMeals.module.css'
 import Card from '../UI/Card/Card'
 import Meal from './Meal'
-
-const DUMMY_MEALS = [
-	{
-		id: 'm1',
-		name: 'Sushi',
-		description: 'Finest fish and veggies',
-		price: 22.99,
-	},
-	{
-		id: 'm2',
-		name: 'Schnitzel',
-		description: 'A german specialty!',
-		price: 16.5,
-	},
-	{
-		id: 'm3',
-		name: 'Barbecue Burger',
-		description: 'American, raw, meaty',
-		price: 12.99,
-	},
-	{
-		id: 'm4',
-		name: 'Green Bowl',
-		description: 'Healthy...and green...', 
-		price: 18.99,
-	},
-]
+import {useEffect, useCallback, useState} from 'react'
+import useHtml from '../hooks/use-html'
 
 const AvailableMeals = () => {
-	const meals = DUMMY_MEALS.map(meal => <Meal id={meal.id} key={meal.id} meals={meal}></Meal>)
+	let meals
+	const [currentMeals, setMeals] = useState()
+	const {fetchData, isLoading, error} = useHtml()
+
+	const processData = (data) => {
+		let avaiableMeals = []
+		for(let pos in data) {
+			avaiableMeals.push({id:pos, ...data[pos]})
+		}
+		
+		if(data) {
+			setMeals(avaiableMeals)
+		}
+	}
+
+	const fetchHandler = useCallback(() => {
+		fetchData({url:'https://foodorder-96b72-default-rtdb.europe-west1.firebasedatabase.app/meals.json'}, processData)
+	}, [fetchData])
+
+
+	useEffect(() => {
+		fetchHandler()
+	}, [fetchHandler])
+
+	if (currentMeals) {
+		meals = currentMeals.map(meal => <Meal id={meal.id} key={meal.id} meals={meal}></Meal>)
+	}
 
 	return (
 		<section className={styles.meals}>
 			<Card>
-				<ul>{meals}</ul>
+				{isLoading ? <p className={styles.loading}>loading...</p> : ''}
+				{error && error}
+				{currentMeals ?  <ul>{meals}</ul> : ''}
 			</Card>
 		</section>
 	)
