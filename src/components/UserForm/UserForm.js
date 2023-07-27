@@ -10,7 +10,7 @@ const UserForm = props => {
 	const {
 		changeValueHandler: changeName,
 		checkIsTouched: nameIsTouched,
-		uncheckIsTouched: uncheckName,
+		// uncheckIsTouched: uncheckName,
 		enteredValue: nameValue,
 		isNotValid: nameNotValid,
 		isValid: nameValid,
@@ -19,7 +19,7 @@ const UserForm = props => {
 	const {
 		changeValueHandler: changeAdress,
 		checkIsTouched: adressIsTouched,
-		uncheckIsTouched: uncheckAdress,
+		// uncheckIsTouched: uncheckAdress,
 		enteredValue: adressValue,
 		isNotValid: adressNotValid,
 		isValid: adressValid,
@@ -28,7 +28,7 @@ const UserForm = props => {
 	const {
 		changeValueHandler: changeNumber,
 		checkIsTouched: numberIsTouched,
-		uncheckIsTouched: uncheckNumber,
+		// uncheckIsTouched: uncheckNumber,
 		enteredValue: numberValue,
 		isNotValid: numberNotValid,
 		isValid: numberValid,
@@ -37,7 +37,7 @@ const UserForm = props => {
 	const {
 		changeValueHandler: changeEmail,
 		checkIsTouched: emailIsTouched,
-		uncheckIsTouched: uncheckEmail,
+		// uncheckIsTouched: uncheckEmail,
 		enteredValue: emailValue,
 		isNotValid: emailNotValid,
 		isValid: emailValid,
@@ -81,7 +81,7 @@ const UserForm = props => {
 			console.log('your order has been completed');
 	
 			ctx.clearCart()
-			props.onClose()
+			props.onClose(true)
 		}
 	}
 
